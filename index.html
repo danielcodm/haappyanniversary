@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Happy 4th Anniversary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="brand">Happy 4 Years</h1>
+      <nav class="nav">
+        <button id="startJourney" class="btn-primary">Start</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <h2>To my love — four beautiful years</h2>
+        <p>Thank you for every laugh, every lesson, and every quiet moment. Here's to us.</p>
+        <div class="hero-actions">
+          <button id="viewTimeline" class="btn-primary">Our Journey</button>
+          <a href="#gallery" class="btn-ghost">See Photos</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="timeline" class="container timeline">
+      <h3>Our 4-Year Journey</h3>
+      <div class="grid timeline-grid">
+        <article class="card">
+          <img src="WhatsApp Image 2025-12-15 at 07.07.43.jpeg" alt="Year 1 photo">
+          <p><strong>Year 1</strong> — The beginning: curiosity, spark, and all the little firsts.</p>
+        </article>
+        <article class="card">
+          <img src="WhatsApp Image 2025-12-15 at 06.03.07.jpeg" alt="Year 2 photo">
+          <p><strong>Year 2</strong> — Growth: learning, laughter, and choosing each other.</p>
+        </article>
+        <article class="card">
+          <img src="WhatsApp Image 2025-12-15 at 06.23.05.jpeg" alt="Year 3 photo">
+          <p><strong>Year 3</strong> — Depth: partnership, trust, and comfort.</p>
+        </article>
+        <article class="card">
+          <img src="WhatsApp Image 2025-12-15 at 06.23.07.jpeg" alt="Year 4 photo">
+          <p><strong>Year 4</strong> — Here we are: stronger, kinder, together.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="container letters">
+      <h3>Letters</h3>
+      <div class="letter-grid">
+        <div class="letter">My love, thank you for being my home. Every day with you is a gift.</div>
+        <div class="letter">I remember our first date — I knew then my heart had found its place.</div>
+      </div>
+    </section>
+
+    <section id="gallery" class="container gallery">
+      <h3>Memories Together</h3>
+      <div class="grid gallery-grid">
+        <img src="WhatsApp Image 2025-12-15 at 06.03.07.jpeg" alt="Memory 1">
+        <img src="WhatsApp Image 2025-12-15 at 06.19.03(1).jpeg" alt="Memory 2">
+        <img src="WhatsApp Image 2025-12-15 at 06.23.05.jpeg" alt="Memory 3">
+        <img src="WhatsApp Image 2025-12-15 at 06.23.07.jpeg" alt="Memory 4">
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <audio controls loop>
+        <source src="One Of The Girls (with JENNIE, Lily Rose Depp) -  The Weeknd, JENNIE, and Lily-Rose Depp.mp3" type="audio/mpeg">
+        Your browser does not support audio playback.
+      </audio>
+      <p>Happy 4 Years — with all my heart 💕</p>
+    </div>
+  </footer>
+
+  <canvas id="confetti"></canvas>
+
+  <script>
+    // Smooth scroll to timeline
+    document.getElementById('startJourney').addEventListener('click', () => {
+      document.getElementById('timeline').scrollIntoView({behavior: 'smooth'});
+    });
+    document.getElementById('viewTimeline').addEventListener('click', () => {
+      document.getElementById('timeline').scrollIntoView({behavior: 'smooth'});
+    });
+
+    // Hearts on click
+    document.body.addEventListener('click', (e) => {
+      if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A') return;
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = (e.pageX - 12) + 'px';
+      heart.style.top = (e.pageY - 12) + 'px';
+      heart.textContent = '❤️';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 2000);
+    });
+
+    // Simple confetti (canvas)
+    const canvas = document.getElementById('confetti');
+    const ctx = canvas.getContext && canvas.getContext('2d');
+    if (ctx) {
+      let W = canvas.width = innerWidth;
+      let H = canvas.height = innerHeight;
+      const pieces = [];
+      function rand(min,max){return Math.random()*(max-min)+min}
+      function Piece(){this.x=rand(0,W); this.y=rand(-H,0); this.r=rand(4,10); this.c=`hsl(${rand(0,360)},80%,60%)`; this.v=rand(1,4)}
+      for(let i=0;i<90;i++) pieces.push(new Piece());
+      function loop(){ctx.clearRect(0,0,W,H); pieces.forEach(p=>{p.y+=p.v; ctx.fillStyle=p.c; ctx.fillRect(p.x,p.y,p.r,p.r/2); if(p.y>H) {p.y=-10; p.x=rand(0,W)}}); requestAnimationFrame(loop)}
+      loop();
+      addEventListener('resize', ()=>{W=canvas.width=innerWidth; H=canvas.height=innerHeight});
+    }
+  </script>
+</body>
+</html>
